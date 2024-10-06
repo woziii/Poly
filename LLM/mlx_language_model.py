@@ -12,7 +12,7 @@ console = Console()
 class MLXLanguageModelHandler(BaseHandler):
     def setup(
         self,
-        model_name="mlx-community/Meta-Llama-3-8B-Instruct-4bit",
+        model_name="mlx-community/Llama-3.2-3B-Instruct-8bit",
         device="mps",
         torch_dtype="float16",
         gen_kwargs={},
