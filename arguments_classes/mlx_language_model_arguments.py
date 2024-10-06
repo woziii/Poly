@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 @dataclass
 class MLXLanguageModelHandlerArguments:
     mlx_lm_model_name: str = field(
-        default="mlx-community/Meta-Llama-3-8B-Instruct-4bit",
+        default="mlx-community/Llama-3.2-3B-Instruct-8bit",
         metadata={
             "help": "The pretrained language model to use. Default is 'microsoft/Phi-3-mini-4k-instruct'."
         },
