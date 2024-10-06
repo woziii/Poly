@@ -6,26 +6,27 @@ import numpy as np
 from rich.console import Console
 import torch
 from langdetect import detect
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 console = Console()
 
 WHISPER_LANGUAGE_TO_MELO_LANGUAGE = {
     "en": "EN",
-    "fr": "FR",
-    "es": "ES",
-    "zh": "ZH",
-    "ja": "JP",
-    "ko": "KR",
+    #"fr": "FR",
+    #"es": "ES",
+    #"zh": "ZH",
+    #"ja": "JP",
+    #"ko": "KR",
 }
 
 WHISPER_LANGUAGE_TO_MELO_SPEAKER = {
     "en": "EN-BR",
-    "fr": "FR",
-    "es": "ES",
-    "zh": "ZH",
-    "ja": "JP",
-    "ko": "KR",
+    #"fr": "FR",
+    #"es": "ES",
+    #"zh": "ZH",
+    #"ja": "JP",
+    #"ko": "KR",
 }
 
 class MeloTTSHandler(BaseHandler):
@@ -35,7 +36,7 @@ class MeloTTSHandler(BaseHandler):
         device="mps",
         language="en",
         speaker_to_id="en",
-        gen_kwargs={},  # Unused
+        gen_kwargs={},
         blocksize=512,
     ):
         self.should_listen = should_listen
@@ -73,7 +74,8 @@ class MeloTTSHandler(BaseHandler):
         if language_code is None:
             language_code = self.detect_language(llm_sentence)
 
-        console.print(f"[blue]POLY ({language_code.upper()}): {llm_sentence}")
+        tts_timestamp = datetime.now().strftime("%H:%M:%S.%f")[:-3]
+        console.print(f"[blue]POLY ({language_code.upper()})[{tts_timestamp}]: {llm_sentence}")
 
         if language_code != self.language:
             logger.info(f"Switching language: {self.language} -> {language_code}")
